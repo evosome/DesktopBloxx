@@ -1,0 +1,55 @@
+
+package world {
+
+    class World {
+
+    }
+
+}
+
+package tower {
+
+    class Tower <<Node3D>> {
+        + add_block(type: BlockType, connection_quality: ConnectionQuality)
+    }
+
+    class BuildingNode {
+        + get_cost() -> int
+        + get_block_type() -> BlockType
+        + get_dwellers_amount() -> int
+        + get_connection_quality() -> ConnectionQuality
+    }
+
+    Tower -* BuildingNode
+
+    enum FlyEndReason {
+        TOUCHED_TOWER,
+        FLEW_OFF
+    }
+
+    class BlockEntity <<Node3D>> {
+        {signal} fly_ended(reason: FlyEndReason)
+        {async} drop() -> FlyEndReason
+        {async} throw(direction: Vector3, force: float) -> void
+    }
+
+    BlockEntity -- FlyEndReason
+
+    enum BlockKind {
+        BASE,
+        COMMON,
+        ROOF
+    }
+
+    class BlockType <<Resource>> {
+        - _cost_calculator: BlockCostCalculator
+        + get_packed_model() -> PackedScene
+        + get_block_kind() -> BlockKind
+        + get_max_dwellers() -> int
+        + calculate_cost(building_node: BuildingNode) -> int
+    }
+
+    BlockType -- BuildingNode
+    BlockType -- BlockKind
+
+}

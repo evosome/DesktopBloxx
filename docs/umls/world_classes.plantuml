@@ -1,0 +1,69 @@
+
+package world {
+
+    class World {
+        + get_tower() -> Tower
+        + get_weather_manager() -> WeatherManager
+        + get_time_manager() -> TimeManager
+        + get_enviroment() -> Enviroment
+    }
+
+    package map {
+
+        class Enviroment {
+            + set_sky_color(value: Color)
+            + set_fog_visible(value: boolean)
+            + set_rain_visible(value: boolean)
+        }
+
+    }
+
+    package weather {
+
+        class WeatherManager {
+            + {signal} gonna_change_weather(weather: Weather)
+            + get_current_weather() -> Weather
+            + queue_next_weather(weather_type: WeatherType)
+        }
+
+        class WeatherType <<Resource>> {
+            + icon: Texture2D
+            + name: String
+            + world_affector: WeatherAffector
+        }
+
+        abstract class WeatherAffector <<Resource>> {
+            affect(world: World)
+        }
+
+        WeatherType -- WeatherAffector
+
+    }
+
+    package time {
+
+        enum TimesOfDay {
+            MORNING,
+            AFTERNOON,
+            EVENING,
+            NIGHT
+        }
+
+        class TimeManager <<Node>> {
+            + {signal} time_tick(current_time: Time)
+            + {signal} time_of_day_changed(time_of_day: TimesOfDay)
+            + ctor(start_from: Time)
+            + get_current_time() -> Time
+            + get_time_of_day() -> TimesOfDay
+        }
+
+        class Time <<RefCounted>> {
+            + ctor(hours: int, minutes: int)
+            + get_hours()
+            + get_minutes()
+        }
+
+        TimeManager -- Time
+
+    }
+}
