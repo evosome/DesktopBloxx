@@ -1,21 +1,90 @@
-[gd_scene load_steps=6 format=3 uid="uid://dfojrfmi68qfk"]
+[gd_scene load_steps=14 format=3 uid="uid://dfojrfmi68qfk"]
 
 [ext_resource type="Shader" uid="uid://brpvi75ktplnp" path="res://resources/legal/shaders/vhs_shader/vhs_shader.gdshader" id="1_pmypa"]
 [ext_resource type="Shader" uid="uid://dm77g0ttfr2me" path="res://resources/legal/shaders/grain/grain.gdshader" id="2_54ns4"]
+[ext_resource type="Shader" uid="uid://bkcog6brql4ho" path="res://resources/legal/shaders/ocean_surface/ocean_surface.gdshader" id="2_ibew7"]
+[ext_resource type="Shader" uid="uid://b0hvkvq0dn4vu" path="res://resources/legal/shaders/skybox/skybox.gdshader" id="2_x4mi7"]
+[ext_resource type="Texture2D" uid="uid://o48nq54qtxvu" path="res://assets/textures/clear_sea_water_2048x2048.png" id="3_yox4n"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_pmypa"]
 shader = ExtResource("1_pmypa")
-shader_parameter/shake = 0.015
+shader_parameter/shake = 0.0
 shader_parameter/noiseQuality = 128.0000019073536
 shader_parameter/noiseIntensity = 0.001
 shader_parameter/offsetIntensity = 0.0
 shader_parameter/colorOffsetIntensity = 0.5
 
-[sub_resource type="BoxMesh" id="BoxMesh_pmypa"]
+[sub_resource type="PlaneMesh" id="PlaneMesh_j76kw"]
+size = Vector2(500, 500)
+subdivide_width = 64
+subdivide_depth = 64
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yox4n"]
+render_priority = 0
+shader = ExtResource("2_ibew7")
+shader_parameter/albedo = Color(1, 1, 1, 1)
+shader_parameter/water_texture1 = ExtResource("3_yox4n")
+shader_parameter/scroll_speed1 = Vector2(0.01, 0)
+shader_parameter/scroll_speed2 = Vector2(-0.03, 0)
+shader_parameter/blend_factor = -0.5
+shader_parameter/scale1 = Vector2(10, 10)
+shader_parameter/scale2 = Vector2(1, 1)
+shader_parameter/wave_strength = 1.445
+shader_parameter/wave_scale = 0.02
+shader_parameter/pixelation_level = 256
+shader_parameter/FoamSize = 0.5
+shader_parameter/WaterOpacity = -0.47
+shader_parameter/FoamGlowIntensity = 0.5
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ibew7"]
+shader = ExtResource("2_x4mi7")
+shader_parameter/day_top_color = Color(0.5510402, 0.770642, 0.9999979, 1)
+shader_parameter/day_bottom_color = Color(0.91188514, 0.905828, 0.91187984, 1)
+shader_parameter/sunset_top_color = Color(0.7, 0.75, 1, 1)
+shader_parameter/sunset_bottom_color = Color(1, 0.5, 0.7, 1)
+shader_parameter/night_top_color = Color(0, 0, 0, 1)
+shader_parameter/night_bottom_color = Color(0, 0, 0, 1)
+shader_parameter/horizon_color = Color(0.7320633, 0.70515615, 0.7051891, 1)
+shader_parameter/horizon_blur = 0.0499999988824
+shader_parameter/sun_color = Color(10, 8, 1, 1)
+shader_parameter/sun_sunset_color = Color(10, 0, 0, 1)
+shader_parameter/sun_size = 0.2
+shader_parameter/sun_blur = 10.0
+shader_parameter/moon_color = Color(1, 0.95, 0.7, 1)
+shader_parameter/moon_size = 0.06
+shader_parameter/moon_blur = 0.1
+shader_parameter/clouds_edge_color = Color(0.8, 0.8, 0.98, 1)
+shader_parameter/clouds_top_color = Color(1, 1, 1, 1)
+shader_parameter/clouds_middle_color = Color(0.92, 0.92, 0.98, 1)
+shader_parameter/clouds_bottom_color = Color(0.83, 0.83, 0.94, 1)
+shader_parameter/clouds_speed = 2.0
+shader_parameter/clouds_direction = 0.2
+shader_parameter/clouds_scale = 1.0
+shader_parameter/clouds_cutoff = 0.11999999731776
+shader_parameter/clouds_fuzziness = 1.27999997138944
+shader_parameter/clouds_weight = 0.67999998480064
+shader_parameter/clouds_blur = 0.25
+shader_parameter/stars_speed = 1.0
+shader_parameter/overwritten_time = 0.0
+
+[sub_resource type="Sky" id="Sky_yox4n"]
+sky_material = SubResource("ShaderMaterial_ibew7")
+
+[sub_resource type="Environment" id="Environment_j76kw"]
+background_mode = 2
+background_color = Color(0.64785993, 0.749827, 0.85985565, 1)
+sky = SubResource("Sky_yox4n")
+fog_enabled = true
+fog_mode = 1
+fog_light_color = Color(0.14767182, 0.14767179, 0.14767179, 1)
+fog_density = 1.0
+fog_sky_affect = 0.592
+
+[sub_resource type="BoxMesh" id="BoxMesh_ibew7"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_x4mi7"]
 shader = ExtResource("2_54ns4")
-shader_parameter/strength = 16.0
+shader_parameter/strength = 19.99999955296
 
 [node name="VhsShaderTest" type="Control"]
 layout_mode = 3
@@ -45,20 +114,33 @@ grow_vertical = 2
 stretch = true
 
 [node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
-size = Vector2i(1152, 648)
+handle_input_locally = false
+size = Vector2i(800, 600)
+render_target_update_mode = 4
 
 [node name="TestScene" type="Node3D" parent="SubViewportContainer/SubViewport"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.0800784)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/TestScene"]
-transform = Transform3D(0.7012095, 0.039571308, -0.71185637, -0.41357723, 0.83587444, -0.3609263, 0.5807403, 0.54749256, 0.60248893, 0, 0, -2.0763407)
-mesh = SubResource("BoxMesh_pmypa")
-skeleton = NodePath("../..")
-
 [node name="Camera3D" type="Camera3D" parent="SubViewportContainer/SubViewport/TestScene"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1948199, 0)
 current = true
 
-[node name="OmniLight3D" type="OmniLight3D" parent="SubViewportContainer/SubViewport/TestScene"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/TestScene"]
+transform = Transform3D(-0.08032069, 0, -0.9967692, 0, 1, 0, 0.9967691, 0, -0.0803207, 0, -4.649062, -2.0763407)
+mesh = SubResource("PlaneMesh_j76kw")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("ShaderMaterial_yox4n")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="SubViewportContainer/SubViewport/TestScene"]
+transform = Transform3D(1, 0, 0, 0, 0.30147123, -0.95347524, 0, 0.95347524, 0.30147123, 0, 0, 0)
+light_energy = 0.5
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="SubViewportContainer/SubViewport/TestScene"]
+environment = SubResource("Environment_j76kw")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/TestScene"]
+transform = Transform3D(0.75343716, 0, -0.65751994, 0, 1, 0, 0.65751994, 0, 0.75343716, 0, 0, -3.2873316)
+mesh = SubResource("BoxMesh_ibew7")
 
 [node name="ColorRect2" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_x4mi7")

@@ -1,0 +1,22 @@
+(!!WIP!!)
+
+This is a continuation of this shader. This project is intended to be used as a universal sky shader for godot (overcast not supported at the moment). Hope that someone might find it useful in their project)
+
+Implemented features:
+
+    Atmospheric scattering (Nothing changed here from the previous version)
+    Sundisc rendering (Again, same as before)
+    Stars cubemap rendering at night (Rotated by the sun’s DirectionalLight3D)
+    Raymarched moons with spherical texture mapping (controlled by respective DirectionalLight3Ds)
+    Raymarched volumetric cumulus clouds (heavy on gpu, but look very fancy ✨)
+    Simple and cheap, but somewhat pretty cirrus clouds
+    Rainbow 🌈
+
+Refer to this sample godot project to learn about uniforms and settings and how to set up this sky in your project.
+
+This project is still in development so many things work not as intended or don’t work at all)
+
+Also this shader is very unoptimized, so use at your own risk!
+
+Shader created by https://godotshaders.com/author/ansol/
+URL: https://godotshaders.com/shader/sky-sorta/
