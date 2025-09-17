@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://dfojrfmi68qfk"]
+[gd_scene load_steps=6 format=3 uid="uid://dfojrfmi68qfk"]
 
 [ext_resource type="Shader" uid="uid://brpvi75ktplnp" path="res://resources/legal/shaders/vhs_shader/vhs_shader.gdshader" id="1_pmypa"]
+[ext_resource type="Shader" uid="uid://dm77g0ttfr2me" path="res://resources/legal/shaders/grain/grain.gdshader" id="2_54ns4"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_pmypa"]
 shader = ExtResource("1_pmypa")
@@ -11,6 +12,10 @@ shader_parameter/offsetIntensity = 0.0
 shader_parameter/colorOffsetIntensity = 0.5
 
 [sub_resource type="BoxMesh" id="BoxMesh_pmypa"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_x4mi7"]
+shader = ExtResource("2_54ns4")
+shader_parameter/strength = 16.0
 
 [node name="VhsShaderTest" type="Control"]
 layout_mode = 3
@@ -54,3 +59,12 @@ skeleton = NodePath("../..")
 current = true
 
 [node name="OmniLight3D" type="OmniLight3D" parent="SubViewportContainer/SubViewport/TestScene"]
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_x4mi7")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
