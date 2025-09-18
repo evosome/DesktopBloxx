@@ -8,62 +8,85 @@ package world {
         + get_enviroment() -> Enviroment
     }
 
-    package map {
+}
 
-        class Enviroment {
-            + set_sky_color(value: Color)
-            + set_fog_visible(value: boolean)
-            + set_rain_visible(value: boolean)
-        }
+package map {
 
+    class Enviroment {
+        + set_sky_color(value: Color)
+        + set_clouds_color(value: Color)
+        + set_fog_visible(value: boolean)
+        + set_rain_visible(value: boolean)
     }
 
-    package weather {
+}
 
-        class WeatherManager {
-            + {signal} gonna_change_weather(weather: Weather)
-            + get_current_weather() -> Weather
-            + queue_next_weather(weather_type: WeatherType)
-        }
+package weather {
 
-        class WeatherType <<Resource>> {
-            + icon: Texture2D
-            + name: String
-            + world_affector: WeatherAffector
-        }
-
-        abstract class WeatherAffector <<Resource>> {
-            affect(world: World)
-        }
-
-        WeatherType -- WeatherAffector
-
+    class WeatherStateEntry <<Resource>> {
+        - {export} _transitions: Array[String]
+        - {export} _weather_type: WeatherType
+        + next_transition() -> String
+        + get_weather_type() -> WeatherType
     }
 
-    package time {
-
-        enum TimesOfDay {
-            MORNING,
-            AFTERNOON,
-            EVENING,
-            NIGHT
-        }
-
-        class TimeManager <<Node>> {
-            + {signal} time_tick(current_time: Time)
-            + {signal} time_of_day_changed(time_of_day: TimesOfDay)
-            + ctor(start_from: Time)
-            + get_current_time() -> Time
-            + get_time_of_day() -> TimesOfDay
-        }
-
-        class Time <<RefCounted>> {
-            + ctor(hours: int, minutes: int)
-            + get_hours()
-            + get_minutes()
-        }
-
-        TimeManager -- Time
-
+    class WeatherScheduler {
+        - {export} _transitions: Dictionary[String, WeatherStateEntry]
+        + {signal} gonna_change_weather(weather: Weather)
+        + get_current_weather() -> Weather
     }
+
+    class Weather {
+        get_type() -> WeatherType
+    }
+
+    class WeatherType <<Resource>> {
+        + icon: Texture2D
+        + name: String
+        + tower_affector: TowerAffector
+        + enviroment_affector: EnviromentAffector
+    }
+
+    abstract class EnviromentAffector <<Resource>> {
+        affect(enviroment: Enviroment)
+    }
+
+    abstract class TowerAffector <<Resource>> {
+        affect(tower: Tower)
+    }
+
+    WeatherType -- EnviromentAffector
+    WeatherType -- TowerAffector
+
+}
+
+package time {
+
+    enum TimesOfDay {
+        MORNING,
+        AFTERNOON,
+        EVENING,
+        NIGHT
+    }
+
+    class TimeManager <<Node>> {
+        + {signal} time_tick(current_time: Time)
+        + {signal} time_of_day_changed(time_of_day: TimesOfDay)
+        + ctor(start_from: Time, ticker: TimeTicker)
+        + get_current_time() -> Time
+        + get_time_of_day() -> TimesOfDay
+    }
+
+    class TimeTicker {
+        + {signal} tick()
+    }
+
+    class Time <<RefCounted>> {
+        + ctor(hours: int, minutes: int)
+        + get_hours()
+        + get_minutes()
+    }
+
+    TimeManager -- Time
+
 }
