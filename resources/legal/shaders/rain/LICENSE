@@ -1,0 +1,3 @@
+Rain and snow canvas item shader that by default will work in Godot 4 but includes comments explaining how to use it in earlier versions. It can be applied to a ColorRect or TextureRect and will blend with their contents. There are variant lines of code to render the rain/snow with or without a trail.
+Shader created by https://godotshaders.com/author/steampunkdemon/
+URL: https://godotshaders.com/shader/rain-and-snow-with-parallax-scrolling-effect/

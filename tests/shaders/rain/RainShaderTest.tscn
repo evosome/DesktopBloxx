@@ -1,0 +1,35 @@
+[gd_scene load_steps=3 format=3 uid="uid://8gcxo131r83r"]
+
+[ext_resource type="Shader" uid="uid://mgth0ruu2j0g" path="res://resources/legal/shaders/rain/rain.gdshader" id="1_3y5oa"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fin23"]
+shader = ExtResource("1_3y5oa")
+shader_parameter/rain_amount = 1000.0
+shader_parameter/near_rain_length = 0.11300000466898
+shader_parameter/far_rain_length = 0.12900000542898
+shader_parameter/near_rain_width = 1.0
+shader_parameter/far_rain_width = 1.0
+shader_parameter/near_rain_transparency = 1.0
+shader_parameter/far_rain_transparency = 0.42100001673762
+shader_parameter/rain_color = Color(0.28485027, 0.2848503, 0.28485012, 1)
+shader_parameter/base_rain_speed = 0.5
+shader_parameter/additional_rain_speed = 0.5
+shader_parameter/slant = 0.16200005519500005
+
+[node name="RainShaderTest" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_fin23")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0)
