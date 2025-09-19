@@ -30,6 +30,8 @@ var _tick_value: int
 
 func _ready() -> void:
 	assert(_timer, "Timer is not set on Clock implementation")
+	
+	_timer.timeout.connect(_on_time_tick)
 
 #endregion
 

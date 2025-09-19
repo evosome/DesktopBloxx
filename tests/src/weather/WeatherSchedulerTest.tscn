@@ -1,0 +1,69 @@
+[gd_scene load_steps=13 format=3 uid="uid://ijwul880oyin"]
+
+[ext_resource type="Script" uid="uid://bikj0upqei8dt" path="res://src/weather/scheduler/WeatherScheduler.gd" id="1_bojqw"]
+[ext_resource type="PackedScene" uid="uid://dpcrc1i4sohlu" path="res://src/time/Clock.tscn" id="2_can0a"]
+[ext_resource type="Script" uid="uid://c3608ss3mjilq" path="res://src/weather/WeatherType.gd" id="2_jcwmj"]
+[ext_resource type="Script" uid="uid://ctvd4gx1xcp0t" path="res://src/weather/scheduler/WeatherSchedulerTransition.gd" id="3_gyh15"]
+
+[sub_resource type="Resource" id="Resource_44as2"]
+script = ExtResource("2_jcwmj")
+_name = "Sunny"
+metadata/_custom_type_script = "uid://c3608ss3mjilq"
+
+[sub_resource type="Resource" id="Resource_7ey3e"]
+script = ExtResource("3_gyh15")
+_transitions = Array[String](["sunny", "rainy", "thunderstorm"])
+_weather_type = SubResource("Resource_44as2")
+_weather_max_hour_long = 1
+metadata/_custom_type_script = "uid://ctvd4gx1xcp0t"
+
+[sub_resource type="Resource" id="Resource_nbbvk"]
+script = ExtResource("2_jcwmj")
+_name = "Sunny"
+metadata/_custom_type_script = "uid://c3608ss3mjilq"
+
+[sub_resource type="Resource" id="Resource_jcwmj"]
+script = ExtResource("3_gyh15")
+_transitions = Array[String](["sunny", "rainy", "thunderstorm"])
+_weather_type = SubResource("Resource_nbbvk")
+_weather_max_hour_long = 1
+metadata/_custom_type_script = "uid://ctvd4gx1xcp0t"
+
+[sub_resource type="Resource" id="Resource_7qnxs"]
+script = ExtResource("2_jcwmj")
+_name = "Rainy"
+metadata/_custom_type_script = "uid://c3608ss3mjilq"
+
+[sub_resource type="Resource" id="Resource_gyh15"]
+script = ExtResource("3_gyh15")
+_transitions = Array[String](["sunny", "thunderstorm"])
+_weather_type = SubResource("Resource_7qnxs")
+_weather_max_hour_long = 1
+metadata/_custom_type_script = "uid://ctvd4gx1xcp0t"
+
+[sub_resource type="Resource" id="Resource_4abkl"]
+script = ExtResource("2_jcwmj")
+_name = "Thunderstorm"
+metadata/_custom_type_script = "uid://c3608ss3mjilq"
+
+[sub_resource type="Resource" id="Resource_of3di"]
+script = ExtResource("3_gyh15")
+_transitions = Array[String](["sunny"])
+_weather_type = SubResource("Resource_4abkl")
+_weather_max_hour_long = 1
+metadata/_custom_type_script = "uid://ctvd4gx1xcp0t"
+
+[node name="WeatherSchedulerTest" type="Node"]
+
+[node name="WeatherScheduler" type="Node" parent="." node_paths=PackedStringArray("_clock")]
+script = ExtResource("1_bojqw")
+_clock = NodePath("../Clock")
+_initial_transition = SubResource("Resource_7ey3e")
+_transition_map = Dictionary[String, ExtResource("3_gyh15")]({
+"rainy": SubResource("Resource_gyh15"),
+"sunny": SubResource("Resource_jcwmj"),
+"thunderstorm": SubResource("Resource_of3di")
+})
+metadata/_custom_type_script = "uid://bikj0upqei8dt"
+
+[node name="Clock" parent="." instance=ExtResource("2_can0a")]

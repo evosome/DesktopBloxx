@@ -15,6 +15,10 @@ var _minutes: int
 func _init(hours: int, minutes: int) -> void:
     _normalize_time(hours, minutes)
 
+
+func _to_string() -> String:
+    return "%02d:%02d" % [_hours, _minutes]
+
 #endregion
 
 
@@ -44,6 +48,22 @@ func _normalize_time(hours, minutes) -> void:
 
 func as_int() -> int:
     return _hours * 60 + _minutes
+
+
+func add(other: BloxxTime) -> BloxxTime:
+    return BloxxTime.new(_hours + other._hours, _minutes + other._minutes)
+
+
+func add_hours(value: int) -> BloxxTime:
+    return BloxxTime.new(_hours + value, _minutes)
+
+
+func sub_hours(value: int) -> BloxxTime:
+    return BloxxTime.new(_hours - value, _minutes)
+
+
+func equals(other: BloxxTime) -> bool:
+    return other.as_int() == as_int()
 
 #endregion
 

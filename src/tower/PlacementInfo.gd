@@ -7,7 +7,7 @@ class_name PlacementInfo extends RefCounted
 
 var _block_type: BlockType
 var _current_streak: int
-var _connection_quality: BuildingNode.ConnectionQuality
+var _connection_quality: TowerBlock.ConnectionQuality
 
 #endregion
 
@@ -17,7 +17,7 @@ var _connection_quality: BuildingNode.ConnectionQuality
 func _init(
         block_type: BlockType,
         current_streak: int,
-        connection_quality: BuildingNode.ConnectionQuality) -> void:
+        connection_quality: TowerBlock.ConnectionQuality) -> void:
     
     _block_type = block_type
     _current_streak = current_streak
@@ -36,7 +36,7 @@ func get_current_streak() -> int:
     return _current_streak
 
 
-func get_connection_quality() -> BuildingNode.ConnectionQuality:
+func get_connection_quality() -> TowerBlock.ConnectionQuality:
     return _connection_quality
 
 #endregion

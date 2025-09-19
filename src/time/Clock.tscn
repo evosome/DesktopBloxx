@@ -7,3 +7,4 @@ script = ExtResource("1_45ele")
 _timer = NodePath("Timer")
 
 [node name="Timer" type="Timer" parent="."]
+autostart = true
