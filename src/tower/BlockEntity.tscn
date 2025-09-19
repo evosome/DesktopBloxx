@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://57jeob20i85f"]
+
+[ext_resource type="Script" uid="uid://ci27t0c4e5oro" path="res://src/tower/BlockEntity.gd" id="1_yojj5"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_yojj5"]
+
+[node name="BlockEntity" type="RigidBody3D" node_paths=PackedStringArray("_visibility_notifier")]
+script = ExtResource("1_yojj5")
+_visibility_notifier = NodePath("VisibleOnScreenNotifier3D")
+metadata/_custom_type_script = "uid://ci27t0c4e5oro"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_yojj5")
+
+[node name="VisibleOnScreenNotifier3D" type="VisibleOnScreenNotifier3D" parent="."]
+aabb = AABB(-0.5, -0.5, -0.5, 1, 1, 1)

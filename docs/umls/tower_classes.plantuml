@@ -10,17 +10,19 @@ package world {
 package tower {
 
     class Tower <<Node3D>> {
-        + add_block(type: BlockType, connection_quality: ConnectionQuality)
+        + {signal} floors_changed(floors_amount: int)
+        + push_block(type: BlockType, connection_quality: ConnectionQuality) -> void
+        + pop_block(index: int) -> BuildingNode
     }
 
-    class BuildingNode {
+    class TowerNode <<RefCounted>> {
         + get_cost() -> int
         + get_block_type() -> BlockType
         + get_dwellers_amount() -> int
         + get_connection_quality() -> ConnectionQuality
     }
 
-    Tower -* BuildingNode
+    Tower -* TowerNode
 
     enum FlyEndReason {
         TOUCHED_TOWER,
@@ -49,7 +51,7 @@ package tower {
         + calculate_cost(building_node: BuildingNode) -> int
     }
 
-    BlockType -- BuildingNode
+    BlockType -- TowerNode
     BlockType -- BlockKind
 
 }
