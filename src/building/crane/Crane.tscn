@@ -2,19 +2,26 @@
 
 [ext_resource type="Script" uid="uid://ccnbg67k43scc" path="res://src/building/crane/Crane.gd" id="1_w715j"]
 [ext_resource type="Texture2D" uid="uid://l7oj4828bji6" path="res://assets/textures/crane_anchor.png" id="2_8g162"]
+[ext_resource type="Script" uid="uid://dxbotxhrxcnbe" path="res://src/building/crane/Rope.gd" id="3_nsvn8"]
 
-[sub_resource type="BoxMesh" id="BoxMesh_w715j"]
-
-[node name="Crane" type="Node3D" node_paths=PackedStringArray("_rotating_mesh")]
+[node name="Crane" type="Node3D" node_paths=PackedStringArray("_rope", "_crane", "_rotating_mesh")]
 script = ExtResource("1_w715j")
-_rotating_mesh = NodePath("FlyingBlockMesh")
+_rope = NodePath("Rope")
+_crane = NodePath("Anchor")
+_rotating_mesh = NodePath("Anchor/FlyingBlockMesh")
 metadata/_custom_type_script = "uid://ccnbg67k43scc"
 
-[node name="Sprite3D" type="Sprite3D" parent="."]
+[node name="Anchor" type="Node3D" parent="."]
+
+[node name="Sprite3D" type="Sprite3D" parent="Anchor"]
 pixel_size = 0.05
 texture_filter = 0
 texture = ExtResource("2_8g162")
 
-[node name="FlyingBlockMesh" type="MeshInstance3D" parent="."]
+[node name="FlyingBlockMesh" type="MeshInstance3D" parent="Anchor"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.6, 0)
-mesh = SubResource("BoxMesh_w715j")
+skeleton = NodePath("../..")
+
+[node name="Rope" type="Node2D" parent="."]
+z_index = -1
+script = ExtResource("3_nsvn8")

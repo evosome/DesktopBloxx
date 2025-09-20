@@ -17,18 +17,6 @@ _weather_type = SubResource("Resource_44as2")
 _weather_max_hour_long = 1
 metadata/_custom_type_script = "uid://ctvd4gx1xcp0t"
 
-[sub_resource type="Resource" id="Resource_nbbvk"]
-script = ExtResource("2_jcwmj")
-_name = "Sunny"
-metadata/_custom_type_script = "uid://c3608ss3mjilq"
-
-[sub_resource type="Resource" id="Resource_jcwmj"]
-script = ExtResource("3_gyh15")
-_transitions = Array[String](["sunny", "rainy", "thunderstorm"])
-_weather_type = SubResource("Resource_nbbvk")
-_weather_max_hour_long = 1
-metadata/_custom_type_script = "uid://ctvd4gx1xcp0t"
-
 [sub_resource type="Resource" id="Resource_7qnxs"]
 script = ExtResource("2_jcwmj")
 _name = "Rainy"
@@ -38,6 +26,18 @@ metadata/_custom_type_script = "uid://c3608ss3mjilq"
 script = ExtResource("3_gyh15")
 _transitions = Array[String](["sunny", "thunderstorm"])
 _weather_type = SubResource("Resource_7qnxs")
+_weather_max_hour_long = 1
+metadata/_custom_type_script = "uid://ctvd4gx1xcp0t"
+
+[sub_resource type="Resource" id="Resource_nbbvk"]
+script = ExtResource("2_jcwmj")
+_name = "Sunny"
+metadata/_custom_type_script = "uid://c3608ss3mjilq"
+
+[sub_resource type="Resource" id="Resource_jcwmj"]
+script = ExtResource("3_gyh15")
+_transitions = Array[String](["sunny", "rainy", "thunderstorm"])
+_weather_type = SubResource("Resource_nbbvk")
 _weather_max_hour_long = 1
 metadata/_custom_type_script = "uid://ctvd4gx1xcp0t"
 

@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="BlockType" load_steps=5 format=3 uid="uid://cawx5rh46n7xi"]
+
+[ext_resource type="Script" uid="uid://qubaejhpl2q0" path="res://src/building/model/BlockModelInfo.gd" id="1_84jnd"]
+[ext_resource type="Script" uid="uid://c5ynaklh1dcpt" path="res://src/building/BlockType.gd" id="1_noiit"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_k81ju"]
+
+[sub_resource type="Resource" id="Resource_xmgye"]
+script = ExtResource("1_84jnd")
+_simple_mesh = SubResource("BoxMesh_k81ju")
+metadata/_custom_type_script = "uid://qubaejhpl2q0"
+
+[resource]
+script = ExtResource("1_noiit")
+_model_info = SubResource("Resource_xmgye")
+metadata/_custom_type_script = "uid://c5ynaklh1dcpt"
