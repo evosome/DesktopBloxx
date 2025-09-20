@@ -1,0 +1,103 @@
+[gd_scene load_steps=11 format=3 uid="uid://cmh51v7q1uu80"]
+
+[ext_resource type="Shader" uid="uid://brpvi75ktplnp" path="res://resources/legal/shaders/vhs_shader/vhs_shader.gdshader" id="1_pyp7m"]
+[ext_resource type="Shader" uid="uid://dm77g0ttfr2me" path="res://resources/legal/shaders/grain/grain.gdshader" id="2_bmcri"]
+[ext_resource type="Texture2D" uid="uid://bd5vuuxbh84r8" path="res://assets/textures/SecondL.png" id="4_wnb1l"]
+[ext_resource type="Texture2D" uid="uid://dlxk4soxgbp7p" path="res://assets/textures/FirstL.png" id="5_ojckr"]
+[ext_resource type="Script" uid="uid://cjawcg4seuh6j" path="res://src/camera_2d.gd" id="5_wnb1l"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rycah"]
+shader = ExtResource("2_bmcri")
+shader_parameter/strength = 16.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ojckr"]
+shader = ExtResource("1_pyp7m")
+shader_parameter/shake = 0.015
+shader_parameter/noiseQuality = 128.0
+shader_parameter/noiseIntensity = 0.001
+shader_parameter/offsetIntensity = 0.0
+shader_parameter/colorOffsetIntensity = 0.5
+
+[sub_resource type="Gradient" id="Gradient_wnb1l"]
+colors = PackedColorArray(5.0056e-06, 0, 0.931491, 1, 0.969807, 0.88777, 0.904787, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ojckr"]
+gradient = SubResource("Gradient_wnb1l")
+width = 800
+height = 600
+fill_from = Vector2(0.5, 1)
+fill_to = Vector2(0.486239, 0)
+metadata/_snap_count = 58
+
+[sub_resource type="Environment" id="Environment_wnb1l"]
+background_mode = 3
+adjustment_enabled = true
+
+[node name="SceneTest" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Camera2D" type="Camera2D" parent="."]
+anchor_mode = 0
+script = ExtResource("5_wnb1l")
+
+[node name="ColorRect2" type="ColorRect" parent="Camera2D"]
+material = SubResource("ShaderMaterial_rycah")
+offset_right = 800.0
+offset_bottom = 600.0
+color = Color(1, 1, 1, 0)
+
+[node name="ColorRect" type="ColorRect" parent="Camera2D"]
+material = SubResource("ShaderMaterial_ojckr")
+offset_right = 800.0
+offset_bottom = 600.0
+color = Color(1, 1, 1, 0)
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+layout_mode = 0
+offset_right = 800.0
+offset_bottom = 600.0
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(800, 600)
+render_target_update_mode = 4
+
+[node name="Scene" type="Node3D" parent="SubViewportContainer/SubViewport"]
+
+[node name="Parallax2D" type="ParallaxBackground" parent="."]
+
+[node name="BG" type="ParallaxLayer" parent="Parallax2D"]
+position = Vector2(0, -90)
+motion_scale = Vector2(0, 0)
+
+[node name="Bg" type="Sprite2D" parent="Parallax2D/BG"]
+position = Vector2(3.05176e-05, 90)
+texture = SubResource("GradientTexture2D_ojckr")
+offset = Vector2(400, 300)
+
+[node name="Second" type="ParallaxLayer" parent="Parallax2D"]
+motion_scale = Vector2(1, 0.3)
+
+[node name="Sprite" type="Sprite2D" parent="Parallax2D/Second"]
+modulate = Color(0.796521, 0.839585, 0.993385, 1)
+position = Vector2(400, 306)
+scale = Vector2(4.1, 4.1)
+texture = ExtResource("4_wnb1l")
+
+[node name="First" type="ParallaxLayer" parent="Parallax2D"]
+position = Vector2(0, -90)
+
+[node name="Sprite" type="Sprite2D" parent="Parallax2D/First"]
+modulate = Color(0.699192, 0.912541, 0.996168, 1)
+position = Vector2(400, 396)
+scale = Vector2(4.1, 4.1)
+texture = ExtResource("5_ojckr")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_wnb1l")

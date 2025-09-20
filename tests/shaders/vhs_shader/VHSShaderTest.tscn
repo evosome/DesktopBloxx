@@ -6,7 +6,7 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_pmypa"]
 shader = ExtResource("1_pmypa")
 shader_parameter/shake = 0.015
-shader_parameter/noiseQuality = 128.0000019073536
+shader_parameter/noiseQuality = 128.0
 shader_parameter/noiseIntensity = 0.001
 shader_parameter/offsetIntensity = 0.0
 shader_parameter/colorOffsetIntensity = 0.5
@@ -46,14 +46,14 @@ stretch = true
 
 [node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
 handle_input_locally = false
-size = Vector2i(1152, 648)
+size = Vector2i(800, 600)
 render_target_update_mode = 4
 
 [node name="TestScene" type="Node3D" parent="SubViewportContainer/SubViewport"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.0800784)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.08008)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/TestScene"]
-transform = Transform3D(0.7012095, 0.039571308, -0.71185637, -0.41357723, 0.83587444, -0.3609263, 0.5807403, 0.54749256, 0.60248893, 0, 0, -2.0763407)
+transform = Transform3D(0.701209, 0.0395713, -0.711856, -0.413577, 0.835874, -0.360926, 0.58074, 0.547493, 0.602489, 0, 0, -2.07634)
 mesh = SubResource("BoxMesh_pmypa")
 skeleton = NodePath("../..")
 

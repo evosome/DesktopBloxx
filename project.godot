@@ -11,8 +11,17 @@ config_version=5
 [application]
 
 config/name="DesktopBloxx"
-config/features=PackedStringArray("4.5", "GL Compatibility")
+config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
+
+[display]
+
+window/size/viewport_width=800
+window/size/viewport_height=600
+
+[dotnet]
+
+project/assembly_name="DesktopBloxx"
 
 [editor_plugins]
 

@@ -5,16 +5,16 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_fin23"]
 shader = ExtResource("1_3y5oa")
 shader_parameter/rain_amount = 1000.0
-shader_parameter/near_rain_length = 0.11300000466898
-shader_parameter/far_rain_length = 0.12900000542898
+shader_parameter/near_rain_length = 0.113
+shader_parameter/far_rain_length = 0.129
 shader_parameter/near_rain_width = 1.0
 shader_parameter/far_rain_width = 1.0
 shader_parameter/near_rain_transparency = 1.0
-shader_parameter/far_rain_transparency = 0.42100001673762
-shader_parameter/rain_color = Color(0.28485027, 0.2848503, 0.28485012, 1)
+shader_parameter/far_rain_transparency = 0.421
+shader_parameter/rain_color = Color(0.28485, 0.28485, 0.28485, 1)
 shader_parameter/base_rain_speed = 0.5
 shader_parameter/additional_rain_speed = 0.5
-shader_parameter/slant = 0.16200005519500005
+shader_parameter/slant = 0.162
 
 [node name="RainShaderTest" type="Control"]
 layout_mode = 3
