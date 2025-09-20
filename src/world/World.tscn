@@ -1,0 +1,32 @@
+[gd_scene load_steps=4 format=3 uid="uid://b4hllx5fl1trx"]
+
+[ext_resource type="Script" uid="uid://dbtb7hx8edqam" path="res://src/world/World.gd" id="1_gnfkn"]
+[ext_resource type="Script" uid="uid://cbpgg5cy387xa" path="res://src/time/Clock.gd" id="2_sbhfu"]
+[ext_resource type="Script" uid="uid://bikj0upqei8dt" path="res://src/weather/scheduler/WeatherScheduler.gd" id="3_uxida"]
+
+[node name="World" type="Node" node_paths=PackedStringArray("_clock", "_weather_scheduler")]
+script = ExtResource("1_gnfkn")
+_clock = NodePath("Clock")
+_weather_scheduler = NodePath("WeatherScheduler")
+metadata/_custom_type_script = "uid://dbtb7hx8edqam"
+
+[node name="Clock" type="Node" parent="."]
+script = ExtResource("2_sbhfu")
+metadata/_custom_type_script = "uid://cbpgg5cy387xa"
+
+[node name="WeatherScheduler" type="Node" parent="."]
+script = ExtResource("3_uxida")
+metadata/_custom_type_script = "uid://bikj0upqei8dt"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="CanvasLayer/SubViewportContainer"]
+size = Vector2i(1152, 648)

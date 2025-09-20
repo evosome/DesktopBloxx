@@ -6,6 +6,8 @@ package world {
         + get_weather_manager() -> WeatherManager
         + get_time_manager() -> TimeManager
         + get_enviroment() -> Enviroment
+        + set_wind_force(value: float) -> void
+        + get_wind_force() -> float
     }
 
 }

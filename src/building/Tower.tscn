@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://bbvnnep3kmfpe"]
+
+[ext_resource type="Script" uid="uid://cs0hltkincfok" path="res://src/building/Tower.gd" id="1_ryxmd"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ryxmd"]
+
+[node name="Tower" type="Node3D"]
+script = ExtResource("1_ryxmd")
+metadata/_custom_type_script = "uid://cs0hltkincfok"
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("BoxShape3D_ryxmd")

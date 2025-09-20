@@ -14,7 +14,7 @@ enum BlockKind {
 
 #region fields
 
-@export var _packed_model: PackedScene
+@export var _model_info: BlockModelInfo
 @export var _block_kind: BlockKind = BlockKind.COMMON
 @export var _max_dwellers: int = 2
 @export var _cost_calculator: BlockCostCalculator
@@ -30,6 +30,10 @@ func get_block_kind() -> BlockKind:
 
 func get_max_dwellers() -> int:
     return _max_dwellers
+
+
+func get_simple_mesh() -> Mesh:
+    return _model_info.get_simple_mesh()
 
 #endregion
 
@@ -48,10 +52,9 @@ func calculate_cost(placement_info: PlacementInfo) -> int:
 ## Instantiate new Model-like object from packed model scene. If
 ## instance of the specified packed model scene is not Model-like throw error.
 func instantiate_model() -> BlockModel:
-    var instance = _packed_model.instantiate()
-    if not instance is BlockModel:
-        push_error("Instance of packed model should be Model-like object")
+    if !_model_info:
+        push_error("Model info is not set on block type resource")
         return null
-    return instance as BlockModel
+    return _model_info.instantiate_model()
 
 #endregion

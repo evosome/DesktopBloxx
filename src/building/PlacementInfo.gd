@@ -15,13 +15,13 @@ var _connection_quality: TowerBlock.ConnectionQuality
 #region builtins
 
 func _init(
-        block_type: BlockType,
-        current_streak: int,
-        connection_quality: TowerBlock.ConnectionQuality) -> void:
-    
-    _block_type = block_type
-    _current_streak = current_streak
-    _connection_quality = connection_quality
+		block_type: BlockType,
+		current_streak: int,
+		connection_quality: TowerBlock.ConnectionQuality) -> void:
+	
+	_block_type = block_type
+	_current_streak = current_streak
+	_connection_quality = connection_quality
 
 #endregion
 
@@ -29,14 +29,14 @@ func _init(
 #region setters/getters
 
 func get_block_type() -> BlockType:
-    return _block_type
+	return _block_type
 
 
 func get_current_streak() -> int:
-    return _current_streak
+	return _current_streak
 
 
 func get_connection_quality() -> TowerBlock.ConnectionQuality:
-    return _connection_quality
+	return _connection_quality
 
 #endregion

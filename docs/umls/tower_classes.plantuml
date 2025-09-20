@@ -7,7 +7,7 @@ package world {
 
 }
 
-package tower {
+package building {
 
     class Tower <<Node3D>> {
         + {signal} floors_changed(floors_amount: int)
@@ -15,18 +15,19 @@ package tower {
         + pop_block(index: int) -> BuildingNode
     }
 
-    class TowerNode <<RefCounted>> {
+    class TowerBlock <<RefCounted>> {
         + get_cost() -> int
         + get_block_type() -> BlockType
         + get_dwellers_amount() -> int
         + get_connection_quality() -> ConnectionQuality
     }
 
-    Tower -* TowerNode
+    Tower -* TowerBlock
 
     enum FlyEndReason {
         TOUCHED_TOWER,
-        FLEW_OFF
+        FLEW_OFF,
+        TOUCHED_GROUND
     }
 
     class BlockEntity <<Node3D>> {
@@ -51,7 +52,34 @@ package tower {
         + calculate_cost(building_node: BuildingNode) -> int
     }
 
-    BlockType -- TowerNode
+    package crane {
+
+        class Crane <<Node3D>> {
+            + set_block_type(type: BlockType)
+            + set_anchor_rotation(anchor_rotation: CraneAnchorRotation)
+        }
+
+        abstract class CraneAnchorRotation <<Resource>> {
+            + apply(block: Node3D)
+        }
+
+        class DefaultAnchorRotation extends CraneAnchorRotation {
+            + _init(world: World)
+        }
+
+    }
+
+    class Building <<Node3D>> {
+        + {async} release_block() -> FlyEndReason
+        + get_tower() -> Tower
+        + get_crane() -> Crane
+    }
+
+    Building -* Crane
+    Building -* BlockEntity
+    Building -* Tower
+
+    BlockType -- TowerBlock
     BlockType -- BlockKind
 
 }
