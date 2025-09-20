@@ -4,9 +4,9 @@ class_name BlockType extends Resource
 #region enums
 
 enum BlockKind {
-	BASE,
-	COMMON,
-	ROOF
+    BASE,
+    COMMON,
+    ROOF
 }
 
 #endregion
@@ -25,11 +25,11 @@ enum BlockKind {
 #region setters/getters
 
 func get_block_kind() -> BlockKind:
-	return _block_kind
+    return _block_kind
 
 
 func get_max_dwellers() -> int:
-	return _max_dwellers
+    return _max_dwellers
 
 
 func get_simple_mesh() -> Mesh:
@@ -43,10 +43,10 @@ func get_simple_mesh() -> Mesh:
 ## Shorthand for
 ## [code] block_type.get_cost_calculator().calculate(...) [/code]
 func calculate_cost(placement_info: PlacementInfo) -> int:
-	if !_cost_calculator:
-		push_error("Block cost calculator is not set on block type resouce")
-		return 0
-	return _cost_calculator.calculate(placement_info)
+    if !_cost_calculator:
+        push_error("Block cost calculator is not set on block type resouce")
+        return 0
+    return _cost_calculator.calculate(placement_info)
 
 
 ## Instantiate new Model-like object from packed model scene. If
